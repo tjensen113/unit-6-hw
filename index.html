@@ -5,10 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Giphy homework</title>
-    <style type="text/css">button, div, form inpu{margin: 10px;}
+    <style type="text/css">button, div, form input{margin: 10px;}
     </style>
 </head>
+
 <body>
+        <button data-animal="dogs">dogs</button>
+        <button data-animal="cat">cats</button>
+        <button data-animal="zebra">zebra</button>
+        <button data-animal="worms">worms</button>
+        <button data-animal="squirrels">squirrel</button>
+        <button data-animal="racoon">racoon</button>
+        <button data-animal="beatles">beatles</button>
+        <button data-animal="fish">fish</button>
+        <button data-animal="ground hog">ground hog</button>
+        <button data-animal="wolf">wolf</button>
+        <button data-animal="monkey">monkey</button>
+        
+
+    
     <div class = "container">
         <h1>Animal search</h1>
         <div id ="button-view"></div>
@@ -44,7 +59,7 @@
         
         
         
-        var animals = ['dogs', 'cats','zebra', 'worms','squirrel','racoon','beatles','fish','ground hog', 'wolf'];
+        
 
         function renderButton(){
             $("#buttons-view").empty();
@@ -69,10 +84,10 @@
 
         renderButton();
 
-        });
-
+        }):
+    </script>
         renderButton();        
-        </script>
+        
 
         
     </div>

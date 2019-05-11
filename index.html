@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Giphy homework</title>
+    <style type="text/css">button, div, form inpu{margin: 10px;}
+    </style>
+</head>
+<body>
+    <div class = "container">
+        <h1>Animal search</h1>
+        <div id ="button-view"></div>
+
+        <form id = "animal-form">
+            <label for = "animal-input">Add animal here</label>
+            <input type="text" id="animal-input"><br>
+
+            <input id="add-animal"type="submit" value="add a animal"><br>
+        </form>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script type="text/javascript">
+
+        // Adding click event listen listener to all buttons
+    $("button").on("click", function() {
+      // Grabbing and storing the data-animal property value from the button
+      var animal = $(this).attr("data-animal");
+
+      // Constructing a queryURL using the animal name
+      var queryURL = "http://api.giphy.com/v1/gifs/search?q=" +
+        animal + "&api_key=toTaySWBS3sikJObiDiiVsNMhkM4HHlX";
+
+      // Performing an AJAX request with the queryURL
+      $.ajax({
+        url: queryURL,
+        method: "GET"
+      })
+
+      .then(function(response) {
+          console.log(queryURL);
+
+        
+        
+        
+        var animals = ['dogs', 'cats','zebra', 'worms','squirrel','racoon','beatles','fish','ground hog', 'wolf'];
+
+        function renderButton(){
+            $("#buttons-view").empty();
+            for (var i = 0; i < animals.length; i++){
+                var a = $("button");
+                a.addClass("animal");
+                a.attr("data-name",animals[i]);
+                a.text(animals[i]);
+                $("#buttons-view").append(a);
+
+            }
+
+
+        }
+
+
+        $("add-animal").on('click', function(event){
+            event.preventDefault();
+
+        var animal = $("animal-input").val().trim();
+        animals.push(animal);
+
+        renderButton();
+
+        });
+
+        renderButton();        
+        </script>
+
+        
+    </div>
+    
+    
+</body>
+</html>

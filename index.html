@@ -22,7 +22,7 @@
         <button data-animal="ground hog">ground hog</button>
         <button data-animal="wolf">wolf</button>
         <button data-animal="monkey">monkey</button>
-        
+       
 
     
     <div class = "container">
@@ -33,9 +33,9 @@
             <label for = "animal-input">Add animal here</label>
             <input type="text" id="animal-input"><br>
 
-            <input id="add-animal"type="submit" value="add a animal"><br>
+            <input id="animal-input"type="submit" value="add a animal"><br>
         </form>
-
+        <div id ="gifs-appear-here"></div>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script type="text/javascript">
 
@@ -45,7 +45,7 @@
       var animal = $(this).attr("data-animal");
 
       // Constructing a queryURL using the animal name
-      var queryURL = "http://api.giphy.com/v1/gifs/search?q=" +
+      var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
         animal + "&api_key=toTaySWBS3sikJObiDiiVsNMhkM4HHlX";
 
       // Performing an AJAX request with the queryURL
@@ -54,45 +54,47 @@
         method: "GET"
       })
 
-      .then(function(response) {
-          console.log(queryURL);
+     
 
         
+          .then(function(response) {
         
         
-        
+          var results = response.data;
 
-        function renderButton(){
-            $("#buttons-view").empty();
-            for (var i = 0; i < animals.length; i++){
-                var a = $("button");
-                a.addClass("animal");
-                a.attr("data-name",animals[i]);
-                a.text(animals[i]);
-                $("#buttons-view").append(a);
+          
+          for (var i = 0; i < 4; i++) {
+            var animalDiv = $("<div>");
+             var p = $("<p>").text("Rating: " + results[i].rating);
+            var animalImage = $("<img>");
+            
+            animalImage.attr("src", results[i].images.fixed_height.url);
+            animalDiv.append(p);
+            animalDiv.append(animalImage);
 
-            }
+          
+            $("#gifs-appear-here").prepend(animalDiv);
+
+console.log(animal-input)
 
 
-        }
+
+            $("#add-animal").on("click",function(event){
+                event.preventDefault();
+                var animal = $("#animal-input").val().trim();
+                animalDiv.push(animal)
+
+                renderButtons();
+            })
+          }
 
 
-        $("add-animal").on('click', function(event){
-            event.preventDefault();
-
-        var animal = $("animal-input").val().trim();
-        animals.push(animal);
-
-        renderButton();
-
-        }):
-    </script>
-        renderButton();        
-        
-
-        
-    </div>
-    
-    
+        });
+    });
+  </script>
 </body>
+
 </html>
+        
+        
+
